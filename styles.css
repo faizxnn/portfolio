@@ -1,11 +1,13 @@
 :root {
     --primary: #000000;
     --secondary: #ffffff;
-    --accent: #ff0084;
+    --accent: linear-gradient(45deg, #ff0084, #ff00e6);
     --surface: #111111;
     --charcoal: #000000;
     --card-bg: #111111;
     --accent-gray: #404040;
+    --accent-contrast: #ff4dbf;
+    --neon-glow: 0 0 15px rgba(255, 0, 132, 0.3);
 }
 
 body {
@@ -41,18 +43,46 @@ body {
     background: linear-gradient(45deg, var(--accent), #00ff9d);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    position: relative;
+    overflow: hidden;
+    
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(
+            to right,
+            rgba(255,255,255,0) 0%,
+            rgba(255,255,255,0.2) 50%,
+            rgba(255,255,255,0) 100%
+        );
+        transform: skewX(-30deg);
+        transition: left 0.6s ease;
+    }
+    
+    &:hover::after {
+        left: 150%;
+    }
 }
 
 .hero {
     padding: 120px 2rem 2rem;
     background: var(--charcoal) !important;
     margin-top: 60px;
+    position: relative;
+    overflow: hidden;
 }
 
 .hero-content {
     max-width: 1200px;
     margin: 0 auto;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
 }
 
 .profile-image {
@@ -61,6 +91,34 @@ body {
     border-radius: 50%;
     margin-bottom: 2rem;
     border: 3px solid var(--accent);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fadeIn 1s ease-out, float 4s ease-in-out infinite;
+    
+    &:hover {
+        transform: scale(1.05);
+        cursor: pointer;
+    }
+    
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(
+            to right,
+            rgba(255,255,255,0) 0%,
+            rgba(255,255,255,0.1) 50%,
+            rgba(255,255,255,0) 100%
+        );
+        transform: skewX(-30deg);
+        transition: left 0.6s ease;
+    }
+    
+    &:hover::after {
+        left: 150%;
+    }
 }
 
 .hero-title {
@@ -68,6 +126,11 @@ body {
     font-weight: 700;
     margin: 0 0 0.5rem;
     line-height: 1.1;
+    background: linear-gradient(45deg, #ff99cc, #ff4dbf);
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: fadeIn 0.8s ease-out, shine 3s linear infinite;
+    color: transparent;
 }
 
 .hero-subtitle {
@@ -87,8 +150,7 @@ body {
     font-size: 1.1rem;
     color: rgba(255,255,255,0.8);
     letter-spacing: 0.01em;
-    margin-top: 0.5rem;
-    transition: color 0.3s ease;
+    margin: 0;
 }
 
 .location-icon {
@@ -120,6 +182,24 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding-top: 20px !important;
     position: relative;
+    overflow: hidden;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: var(--accent);
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    &:hover::before {
+        opacity: 1;
+    }
 }
 
 .experience-card:hover,
@@ -178,15 +258,25 @@ body {
 
 .social-link {
     color: var(--secondary);
-    transition: color 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     padding: 0;
     background: none;
-}
-
-.social-link:hover {
-    color: var(--accent);
-    background: transparent;
-    transform: translateY(-2px);
+    position: relative;
+    
+    &:hover {
+        transform: scale(1.15);
+        
+        &::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: var(--neon-glow);
+            z-index: -1;
+        }
+    }
 }
 
 .social-link svg {
@@ -215,12 +305,16 @@ body {
     object-fit: contain;
     opacity: 1 !important;
     /* Ensure full visibility */
-    transition: all 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     padding: 2px;
     background: rgba(255, 255, 255, 0.9);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+    &:hover {
+        transform: scale(1.1) rotate(5deg);
+    }
 }
 
 /* Add subtle accent glow to company logos */
@@ -277,9 +371,19 @@ body {
     margin: 2rem 0 2rem;
     text-align: center;
     color: var(--secondary);
-    background: linear-gradient(45deg, var(--secondary), #cccccc);
+    background: linear-gradient(45deg, var(--secondary), var(--accent-contrast));
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    
+    &::after {
+        width: 0;
+        transition: width 0.5s ease-out;
+    }
+    
+    &.visible::after {
+        width: 100%;
+        max-width: 240px;
+    }
 }
 
 .section-title::before {
@@ -305,4 +409,78 @@ body {
     bottom: -1rem;
     left: 50%;
     transform: translateX(-50%);
+}
+
+/* Add these keyframes at the top */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
+}
+
+.cta-button {
+    margin-top: 0;
+    order: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #ff0084, #ff00e6);
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    border: none;
+    cursor: pointer;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.2) 50%,
+        rgba(255,255,255,0) 100%
+    );
+    transform: skewX(-30deg);
+    transition: left 0.6s ease;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255, 0, 132, 0.3);
+}
+
+.cta-button:hover::before {
+    left: 150%;
+}
+
+.arrow-icon {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+}
+
+.cta-button:hover .arrow-icon {
+    transform: translateX(3px);
 }
