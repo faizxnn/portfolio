@@ -3,6 +3,14 @@
     {
       "src": "*.html",
       "use": "@vercel/static"
+    },
+    {
+      "src": "styles.css",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "images/*",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
@@ -11,12 +19,12 @@
       "dest": "/portfolio.html"
     },
     {
-      "src": "/images/(.*)",
-      "dest": "/images/$1"
-    },
-    {
       "src": "/styles.css",
       "dest": "/styles.css"
+    },
+    {
+      "src": "/images/(.*)",
+      "dest": "/images/$1"
     },
     {
       "src": "/(.*)",
