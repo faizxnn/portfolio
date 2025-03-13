@@ -9,6 +9,24 @@
     --accent-gray: #404040;
     --accent-contrast: #ff4dbf;
     --neon-glow: 0 0 15px rgba(255, 0, 132, 0.3);
+    
+    /* Light mode variables */
+    --light-primary: #ffffff;
+    --light-secondary: #333333;
+    --light-surface: #f5f5f5;
+    --light-charcoal: #ffffff;
+    --light-card-bg: #ffffff;
+    --light-accent-gray: #e0e0e0;
+}
+
+/* Light mode class that will be toggled */
+.light-mode {
+    --primary: var(--light-primary);
+    --secondary: var(--light-secondary);
+    --surface: var(--light-surface);
+    --charcoal: var(--light-charcoal);
+    --card-bg: var(--light-card-bg);
+    --accent-gray: var(--light-accent-gray);
 }
 
 /* ===== ANIMATIONS ===== */
@@ -85,6 +103,65 @@ body {
 
 .logo:hover::after {
     left: 150%;
+}
+
+/* Theme toggle switch */
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 1rem;
+}
+
+.theme-switch {
+    display: inline-block;
+    position: relative;
+    width: 50px;
+    height: 24px;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #333;
+    transition: .4s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background: var(--accent);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.theme-icon {
+    margin-right: 8px;
+    color: var(--secondary);
+    font-size: 16px;
 }
 
 /* ===== HERO SECTION ===== */
@@ -569,4 +646,25 @@ body {
     .spacer {
         height: 2rem;
     }
+    
+    .theme-switch-wrapper {
+        margin-right: 0;
+    }
+}
+
+.light-mode .experience-card,
+.light-mode .education-card,
+.light-mode .project-card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.light-mode .nav-bar {
+    background: rgba(255, 255, 255, 0.95);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.light-mode .footer {
+    color: #999;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
 }

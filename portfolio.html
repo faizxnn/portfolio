@@ -30,6 +30,14 @@
                     </svg>
                 </a>
             </div>
+            
+            <div class="theme-switch-wrapper">
+                <span class="theme-icon"><i class="fas fa-moon"></i></span>
+                <label class="theme-switch">
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
         </div>
     </nav>
 
@@ -169,6 +177,43 @@
     <footer class="footer">
         <p class="footer-text">© 2025 Faizan Hussain. </p>
     </footer>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.querySelector('.theme-icon i');
+        
+        // Check for saved theme preference or use preferred color scheme
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        const currentTheme = localStorage.getItem('theme');
+        
+        if (currentTheme === 'light') {
+            document.body.classList.add('light-mode');
+            themeToggle.checked = true;
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        } else if (currentTheme === 'dark') {
+            document.body.classList.remove('light-mode');
+            themeToggle.checked = false;
+            themeIcon.classList.replace('fa-sun', 'fa-moon');
+        } else if (prefersDarkScheme.matches) {
+            document.body.classList.remove('light-mode');
+            themeToggle.checked = false;
+            themeIcon.classList.replace('fa-sun', 'fa-moon');
+        }
+        
+        // Toggle theme when switch is clicked
+        themeToggle.addEventListener('change', function() {
+            if (this.checked) {
+                document.body.classList.add('light-mode');
+                localStorage.setItem('theme', 'light');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                document.body.classList.remove('light-mode');
+                localStorage.setItem('theme', 'dark');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+            }
+        });
+    </script>
 </body>
 
 </html>
