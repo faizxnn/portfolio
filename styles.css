@@ -170,6 +170,7 @@ body {
     gap: 2rem;
     max-width: 1200px;
     margin: 0 auto;
+    margin-bottom: 0.5rem;
 }
 
 .experience-card,
@@ -353,7 +354,7 @@ body {
     }
 
     .section-title {
-        margin: 1.5rem 0 1.5rem;
+        margin: 1rem 0 1.5rem;
     }
 }
 
@@ -368,7 +369,7 @@ body {
     font-weight: 600;
     letter-spacing: -0.02em;
     position: relative;
-    margin: 2rem 0 2rem;
+    margin: 1.5rem 0 2rem;
     text-align: center;
     color: var(--secondary);
     background: linear-gradient(45deg, var(--secondary), var(--accent-contrast));
@@ -502,4 +503,139 @@ body {
     margin: 20px 0;
     text-align: left;
     padding-left: 0;
+}
+
+/* Project Card Styling */
+.project-card {
+    background: var(--card-bg) !important;
+    padding: 2rem;
+    padding-bottom: 1.5rem; /* Reduced bottom padding */
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    height: auto; /* Changed from 100% to auto */
+    display: flex;
+    flex-direction: column;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: var(--accent);
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    &:hover::before {
+        opacity: 1;
+    }
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+    box-shadow: 0 8px 24px rgba(255, 0, 132, 0.15);
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.project-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--secondary);
+}
+
+.github-icon {
+    color: var(--accent-contrast);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease;
+    padding: 0;
+    background: none;
+    position: relative;
+    
+    &:hover {
+        transform: scale(1.15);
+        color: #ff99cc;
+        
+        &::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: var(--neon-glow);
+            z-index: -1;
+            border-radius: 50%;
+        }
+    }
+}
+
+.project-tech {
+    color: var(--accent);
+    font-weight: 500;
+    margin: 0 0 1rem;
+    font-size: 0.9rem;
+}
+
+.project-description {
+    color: var(--secondary);
+    opacity: 0.8;
+    margin: 0;
+    line-height: 1.6;
+    margin-bottom: 0.5rem; /* Added small bottom margin instead of flex-grow */
+}
+
+/* Make sure the projects section has the same spacing as other sections */
+.projects-section {
+    margin-top: 2rem;
+    margin-bottom: 5rem;
+}
+
+/* Ensure consistent spacing between sections */
+.experience-section,
+.projects-section,
+.education-section {
+    padding: 0 2rem;
+    margin-top: 4rem;
+}
+
+@media (max-width: 768px) {
+    .experience-section,
+    .projects-section,
+    .education-section {
+        padding: 0 1.5rem;
+        margin-top: 3rem;
+    }
+    
+    .projects-section {
+        margin-bottom: 4rem;
+    }
+    
+    .section-title {
+        margin: 1rem 0 1.5rem;
+    }
+}
+
+.spacer {
+    height: 4rem;  /* Adjust this value to control the amount of space */
+}
+
+@media (max-width: 768px) {
+    .spacer {
+        height: 2rem;  /* Less space on mobile devices */
+    }
 }
