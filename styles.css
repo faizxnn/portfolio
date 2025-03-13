@@ -1,3 +1,4 @@
+/* ===== VARIABLES ===== */
 :root {
     --primary: #000000;
     --secondary: #ffffff;
@@ -10,6 +11,23 @@
     --neon-glow: 0 0 15px rgba(255, 0, 132, 0.3);
 }
 
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes shine {
+    to { background-position: 200% center; }
+}
+
+/* ===== BASE STYLES ===== */
 body {
     font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background: var(--charcoal);
@@ -18,8 +36,9 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+/* ===== NAVIGATION ===== */
 .nav-bar {
-    background: rgba(0, 0, 0, 0.95) !important;
+    background: rgba(0, 0, 0, 0.95);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     position: fixed;
     width: 100%;
@@ -45,32 +64,33 @@ body {
     -webkit-text-fill-color: transparent;
     position: relative;
     overflow: hidden;
-    
-    &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 50%;
-        height: 100%;
-        background: linear-gradient(
-            to right,
-            rgba(255,255,255,0) 0%,
-            rgba(255,255,255,0.2) 50%,
-            rgba(255,255,255,0) 100%
-        );
-        transform: skewX(-30deg);
-        transition: left 0.6s ease;
-    }
-    
-    &:hover::after {
-        left: 150%;
-    }
 }
 
+.logo::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.2) 50%,
+        rgba(255,255,255,0) 100%
+    );
+    transform: skewX(-30deg);
+    transition: left 0.6s ease;
+}
+
+.logo:hover::after {
+    left: 150%;
+}
+
+/* ===== HERO SECTION ===== */
 .hero {
     padding: 120px 2rem 2rem;
-    background: var(--charcoal) !important;
+    background: var(--charcoal);
     margin-top: 60px;
     position: relative;
     overflow: hidden;
@@ -93,32 +113,33 @@ body {
     border: 3px solid var(--accent);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     animation: fadeIn 1s ease-out, float 4s ease-in-out infinite;
-    
-    &:hover {
-        transform: scale(1.05);
-        cursor: pointer;
-    }
-    
-    &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 50%;
-        height: 100%;
-        background: linear-gradient(
-            to right,
-            rgba(255,255,255,0) 0%,
-            rgba(255,255,255,0.1) 50%,
-            rgba(255,255,255,0) 100%
-        );
-        transform: skewX(-30deg);
-        transition: left 0.6s ease;
-    }
-    
-    &:hover::after {
-        left: 150%;
-    }
+    position: relative;
+}
+
+.profile-image:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.profile-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.1) 50%,
+        rgba(255,255,255,0) 100%
+    );
+    transform: skewX(-30deg);
+    transition: left 0.6s ease;
+}
+
+.profile-image:hover::after {
+    left: 150%;
 }
 
 .hero-title {
@@ -164,272 +185,7 @@ body {
     cursor: default;
 }
 
-.grid-layout {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    margin-bottom: 0.5rem;
-}
-
-.experience-card,
-.education-card {
-    background: var(--card-bg) !important;
-    padding: 2rem;
-    border-radius: 12px;
-    transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding-top: 20px !important;
-    position: relative;
-    overflow: hidden;
-    
-    &::before {
-        content: '';
-        position: absolute;
-        top: -2px;
-        left: -2px;
-        right: -2px;
-        bottom: -2px;
-        background: var(--accent);
-        z-index: -1;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-    
-    &:hover::before {
-        opacity: 1;
-    }
-}
-
-.experience-card:hover,
-.education-card:hover {
-    transform: translateY(-8px);
-    border-color: var(--accent);
-    box-shadow: 0 8px 24px rgba(255, 0, 132, 0.15);
-}
-
-.company,
-.degree {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin: 0 0 0.5rem;
-}
-
-.role,
-.university {
-    color: var(--accent);
-    font-weight: 500;
-    margin: 0 0 0.5rem;
-}
-
-.duration,
-.dates {
-    color: var(--secondary);
-    font-size: 0.9rem;
-}
-
-.achievements,
-.honors {
-    padding-left: 1rem;
-    margin: 1rem 0 0;
-}
-
-.achievements li,
-.honors li {
-    position: relative;
-    padding-left: 1rem;
-    margin-bottom: 0.5rem;
-}
-
-.achievements li::before {
-    content: "▹";
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-}
-
-.social-links {
-    display: flex;
-    gap: 1.5rem;
-    margin: 0;
-    padding: 0;
-}
-
-.social-link {
-    color: var(--secondary);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    padding: 0;
-    background: none;
-    position: relative;
-    
-    &:hover {
-        transform: scale(1.15);
-        
-        &::after {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            background: var(--neon-glow);
-            z-index: -1;
-        }
-    }
-}
-
-.social-link svg {
-    width: 24px;
-    height: 24px;
-    stroke: currentColor;
-}
-
-.footer {
-    text-align: center;
-    padding: 2rem;
-    color: #666;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Updated logo styling */
-.company-logo,
-.school-logo {
-    position: absolute;
-    width: 48px;
-    /* Increased size by 20% from 40px */
-    height: 48px;
-    /* Increased size by 20% from 40px */
-    right: 20px;
-    top: 20px;
-    object-fit: contain;
-    opacity: 1 !important;
-    /* Ensure full visibility */
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    padding: 2px;
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    
-    &:hover {
-        transform: scale(1.1) rotate(5deg);
-    }
-}
-
-/* Add subtle accent glow to company logos */
-.experience-card:hover .company-logo,
-.education-card:hover .school-logo {
-    box-shadow: 0 0 12px rgba(255, 0, 132, 0.2);
-}
-
-/* Remove grayscale filter and background container */
-.experience-card::after {
-    display: none;
-    /* Remove the background container */
-}
-
-/* Add subtle hover effect */
-.company-logo:hover,
-.school-logo:hover {
-    transform: none;
-}
-
-@media (max-width: 768px) {
-    .hero {
-        padding: 100px 1.5rem 1.5rem;
-    }
-
-    .hero-title {
-        font-size: 2.5rem;
-    }
-
-    .grid-layout {
-        grid-template-columns: 1fr;
-    }
-
-    .hero-location {
-        font-size: 1rem;
-    }
-
-    .section-title {
-        margin: 1rem 0 1.5rem;
-    }
-}
-
-.content {
-    margin-bottom: 3rem;
-    /* Added spacing before footer */
-}
-
-/* Section Header Design */
-.section-title {
-    font-size: 1.75rem;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    position: relative;
-    margin: 1.5rem 0 2rem;
-    text-align: center;
-    color: var(--secondary);
-    background: linear-gradient(45deg, var(--secondary), var(--accent-contrast));
-    -webkit-background-clip: text;
-    background-clip: text;
-    
-    &::after {
-        width: 0;
-        transition: width 0.5s ease-out;
-    }
-    
-    &.visible::after {
-        width: 100%;
-        max-width: 240px;
-    }
-}
-
-.section-title::before {
-    content: '';
-    display: block;
-    width: 40px;
-    height: 2px;
-    background: var(--accent);
-    position: absolute;
-    left: 50%;
-    top: -1.5rem;
-    transform: translateX(-50%);
-}
-
-.section-title::after {
-    content: '';
-    display: inline-block;
-    width: 100%;
-    max-width: 240px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.15) 50%, transparent 100%);
-    position: absolute;
-    bottom: -1rem;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-/* Add these keyframes at the top */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
-}
-
-@keyframes shine {
-    to {
-        background-position: 200% center;
-    }
-}
-
+/* ===== CTA BUTTON ===== */
 .cta-button {
     margin-top: 0;
     order: 1;
@@ -485,16 +241,170 @@ body {
 .cta-button:hover .arrow-icon {
     transform: translateX(3px);
 }
+
+/* ===== SECTION LAYOUTS ===== */
+.content {
+    margin-bottom: 3rem;
+}
+
+.grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-bottom: 0.5rem;
+}
+
+.section-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    position: relative;
+    margin: 1.5rem 0 2rem;
+    text-align: center;
+    color: var(--secondary);
+    background: linear-gradient(45deg, var(--secondary), var(--accent-contrast));
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.section-title::after {
+    content: '';
+    display: inline-block;
+    width: 100%;
+    max-width: 240px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.15) 50%, transparent 100%);
+    position: absolute;
+    bottom: -1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: width 0.5s ease-out;
+}
+
+.section-title.visible::after {
+    width: 100%;
+    max-width: 240px;
+}
+
+.section-title::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: var(--accent);
+    position: absolute;
+    left: 50%;
+    top: -1.5rem;
+    transform: translateX(-50%);
+}
+
+.experience-section,
+.projects-section,
+.education-section {
+    padding: 0 2rem;
+    margin-top: 4rem;
+}
+
+.projects-section {
+    margin-bottom: 5rem;
+}
+
+.spacer {
+    height: 4rem;
+}
+
+/* ===== CARDS ===== */
+.experience-card,
+.education-card,
+.project-card {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.experience-card,
+.education-card {
+    padding-top: 20px;
+}
+
+.project-card {
+    padding-bottom: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+}
+
 .experience-card {
     cursor: pointer;
-    transition: transform 0.2s ease;
 }
 
-.experience-card:hover {
-    transform: translateY(-5px);
+.experience-card::before,
+.education-card::before,
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: var(--accent);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
-.achievements {
+.experience-card:hover::before,
+.education-card:hover::before,
+.project-card:hover::before {
+    opacity: 1;
+}
+
+.experience-card:hover,
+.education-card:hover,
+.project-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+    box-shadow: 0 8px 24px rgba(255, 0, 132, 0.15);
+}
+
+/* ===== CARD CONTENT ===== */
+.company,
+.degree,
+.project-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+}
+
+.role,
+.university,
+.project-tech {
+    color: var(--accent);
+    font-weight: 500;
+    margin: 0 0 0.5rem;
+}
+
+.project-tech {
+    font-size: 0.9rem;
+    margin: 0 0 1rem;
+}
+
+.duration,
+.dates {
+    color: var(--secondary);
+    font-size: 0.9rem;
+}
+
+.achievements,
+.honors {
     margin-top: 10px;
     padding-left: 0;
 }
@@ -505,46 +415,56 @@ body {
     padding-left: 0;
 }
 
-/* Project Card Styling */
-.project-card {
-    background: var(--card-bg) !important;
-    padding: 2rem;
-    padding-bottom: 1.5rem; /* Reduced bottom padding */
-    border-radius: 12px;
-    transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.achievements li,
+.honors li {
     position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    height: auto; /* Changed from 100% to auto */
-    display: flex;
-    flex-direction: column;
-    
-    &::before {
-        content: '';
-        position: absolute;
-        top: -2px;
-        left: -2px;
-        right: -2px;
-        bottom: -2px;
-        background: var(--accent);
-        z-index: -1;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-    
-    &:hover::before {
-        opacity: 1;
-    }
+    padding-left: 1rem;
+    margin-bottom: 0.5rem;
 }
 
-.project-card:hover {
-    transform: translateY(-8px);
-    border-color: var(--accent);
-    box-shadow: 0 8px 24px rgba(255, 0, 132, 0.15);
+.achievements li::before {
+    content: "▹";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
 }
 
+.project-description {
+    color: var(--secondary);
+    opacity: 0.8;
+    margin: 0 0 0.5rem;
+    line-height: 1.6;
+}
+
+/* ===== LOGOS ===== */
+.company-logo,
+.school-logo {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    right: 20px;
+    top: 20px;
+    object-fit: contain;
+    opacity: 1;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 2px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.company-logo:hover,
+.school-logo:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.experience-card:hover .company-logo,
+.education-card:hover .school-logo {
+    box-shadow: 0 0 12px rgba(255, 0, 132, 0.2);
+}
+
+/* ===== PROJECT HEADER ===== */
 .project-header {
     display: flex;
     justify-content: space-between;
@@ -552,68 +472,89 @@ body {
     margin-bottom: 1rem;
 }
 
-.project-title {
-    font-size: 1.5rem;
-    font-weight: 600;
+/* ===== SOCIAL LINKS ===== */
+.social-links {
+    display: flex;
+    gap: 1.5rem;
     margin: 0;
+    padding: 0;
+}
+
+.social-link,
+.github-icon {
     color: var(--secondary);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0;
+    background: none;
+    position: relative;
 }
 
 .github-icon {
     color: var(--accent-contrast);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease;
-    padding: 0;
-    background: none;
-    position: relative;
-    
-    &:hover {
-        transform: scale(1.15);
-        color: #ff99cc;
-        
-        &::after {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            background: var(--neon-glow);
-            z-index: -1;
-            border-radius: 50%;
-        }
-    }
 }
 
-.project-tech {
-    color: var(--accent);
-    font-weight: 500;
-    margin: 0 0 1rem;
-    font-size: 0.9rem;
+.social-link:hover,
+.github-icon:hover {
+    transform: scale(1.15);
 }
 
-.project-description {
-    color: var(--secondary);
-    opacity: 0.8;
-    margin: 0;
-    line-height: 1.6;
-    margin-bottom: 0.5rem; /* Added small bottom margin instead of flex-grow */
+.github-icon:hover {
+    color: #ff99cc;
 }
 
-/* Make sure the projects section has the same spacing as other sections */
-.projects-section {
-    margin-top: 2rem;
-    margin-bottom: 5rem;
+.social-link:hover::after,
+.github-icon:hover::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: var(--neon-glow);
+    z-index: -1;
 }
 
-/* Ensure consistent spacing between sections */
-.experience-section,
-.projects-section,
-.education-section {
-    padding: 0 2rem;
-    margin-top: 4rem;
+.github-icon:hover::after {
+    border-radius: 50%;
 }
 
+.social-link svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ===== MEDIA QUERIES ===== */
 @media (max-width: 768px) {
+    .hero {
+        padding: 100px 1.5rem 1.5rem;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .grid-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-location {
+        font-size: 1rem;
+    }
+
+    .section-title {
+        margin: 1rem 0 1.5rem;
+    }
+    
     .experience-section,
     .projects-section,
     .education-section {
@@ -625,17 +566,7 @@ body {
         margin-bottom: 4rem;
     }
     
-    .section-title {
-        margin: 1rem 0 1.5rem;
-    }
-}
-
-.spacer {
-    height: 4rem;  /* Adjust this value to control the amount of space */
-}
-
-@media (max-width: 768px) {
     .spacer {
-        height: 2rem;  /* Less space on mobile devices */
+        height: 2rem;
     }
 }
