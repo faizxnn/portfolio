@@ -277,6 +277,11 @@ input:checked + .slider:before {
     cursor: default;
 }
 
+/* Add this to handle light mode */
+.light-mode .hero-location {
+    color: var(--light-secondary);  /* Use the dark text color in light mode */
+}
+
 /* ===== CTA BUTTON ===== */
 .cta-button {
     margin-top: 0;
