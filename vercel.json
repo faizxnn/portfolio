@@ -9,6 +9,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "*.js",
+      "use": "@vercel/static"
+    },
+    {
       "src": "images/**/*",
       "use": "@vercel/static"
     },
@@ -29,6 +33,10 @@
     {
       "src": "/styles.css",
       "dest": "/styles.css"
+    },
+    {
+      "src": "/particles-config.js",
+      "dest": "/particles-config.js"
     },
     {
       "src": "/images/(.*)",
