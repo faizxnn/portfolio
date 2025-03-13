@@ -12,7 +12,9 @@
     <link rel="alternate icon" href="/favicon.ico?v=2">
 </head>
 
-<body style="background-color: var(--charcoal);">
+<body>
+    <div id="particles-js" class="particles-container"></div>
+    
     <nav class="nav-bar">
         <div class="nav-content">
             <div class="social-links">
@@ -41,7 +43,7 @@
         </div>
     </nav>
 
-    <header class="hero" style="background-color: var(--charcoal);">
+    <header class="hero">
         <div class="hero-content">
             <div class="profile-container">
                 <img src="images/profile-emoji.png" alt="Profile" class="profile-image">
@@ -212,6 +214,26 @@
                 localStorage.setItem('theme', 'dark');
                 themeIcon.classList.replace('fa-sun', 'fa-moon');
             }
+        });
+    </script>
+    
+    <!-- Add these scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="particles-config.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', particlesConfig);
+            
+            // Theme toggle handling for particles
+            const themeToggle = document.getElementById('theme-toggle');
+            themeToggle.addEventListener('change', function() {
+                // Update particles for theme
+                if (pJSDom && pJSDom[0]) {
+                    const particleOpacity = this.checked ? 0.2 : 0.3;
+                    pJSDom[0].pJS.particles.opacity.value = particleOpacity;
+                    pJSDom[0].pJS.fn.particlesRefresh();
+                }
+            });
         });
     </script>
 </body>
