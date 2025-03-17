@@ -222,7 +222,10 @@
     <script src="particles-config.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            particlesJS('particles-js', particlesConfig);
+            const particlesEl = document.getElementById('particles-js');
+            if (particlesEl) {
+                particlesJS('particles-js', particlesConfig);
+            }
             
             // Theme toggle handling for particles
             const themeToggle = document.getElementById('theme-toggle');
