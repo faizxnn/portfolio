@@ -189,6 +189,25 @@
         const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
         const currentTheme = localStorage.getItem('theme');
         
+        function updateParticlesForTheme(isLightMode) {
+            if (pJSDom && pJSDom[0]) {
+                // Update particle colors based on theme
+                const particleColor = isLightMode ? "#000000" : "#ffffff";
+                // Using slightly brighter colors for the lines
+                const lineColor = isLightMode ? "#111111" : "#ffffff";
+                const particleOpacity = isLightMode ? 0.15 : 0.2;
+                const lineOpacity = isLightMode ? 0.4 : 0.5;  // Increased for more brightness
+                
+                pJSDom[0].pJS.particles.color.value = particleColor;
+                pJSDom[0].pJS.particles.line_linked.color = lineColor;
+                pJSDom[0].pJS.particles.opacity.value = particleOpacity;
+                pJSDom[0].pJS.particles.line_linked.opacity = lineOpacity;
+                pJSDom[0].pJS.particles.line_linked.width = 1.2;
+                
+                pJSDom[0].pJS.fn.particlesRefresh();
+            }
+        }
+        
         if (currentTheme === 'light') {
             document.body.classList.add('light-mode');
             themeToggle.checked = true;
@@ -209,10 +228,12 @@
                 document.body.classList.add('light-mode');
                 localStorage.setItem('theme', 'light');
                 themeIcon.classList.replace('fa-moon', 'fa-sun');
+                updateParticlesForTheme(true);
             } else {
                 document.body.classList.remove('light-mode');
                 localStorage.setItem('theme', 'dark');
                 themeIcon.classList.replace('fa-sun', 'fa-moon');
+                updateParticlesForTheme(false);
             }
         });
     </script>
@@ -225,18 +246,13 @@
             const particlesEl = document.getElementById('particles-js');
             if (particlesEl) {
                 particlesJS('particles-js', particlesConfig);
+                
+                // Initialize particles with correct theme
+                setTimeout(() => {
+                    const isLightMode = document.body.classList.contains('light-mode');
+                    updateParticlesForTheme(isLightMode);
+                }, 100);
             }
-            
-            // Theme toggle handling for particles
-            const themeToggle = document.getElementById('theme-toggle');
-            themeToggle.addEventListener('change', function() {
-                // Update particles for theme
-                if (pJSDom && pJSDom[0]) {
-                    const particleOpacity = this.checked ? 0.2 : 0.3;
-                    pJSDom[0].pJS.particles.opacity.value = particleOpacity;
-                    pJSDom[0].pJS.fn.particlesRefresh();
-                }
-            });
         });
     </script>
 </body>
