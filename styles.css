@@ -448,6 +448,24 @@ input:checked + .slider:before {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.experience-card:hover,
+.education-card:hover,
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 32px rgba(255, 0, 132, 0.5),
+                0 0 0 2px rgba(255, 0, 132, 0.3);
+    border-color: rgba(255, 0, 132, 0.5);
+}
+
+/* Light mode specific hover effects */
+.light-mode .experience-card:hover,
+.light-mode .education-card:hover,
+.light-mode .project-card:hover {
+    box-shadow: 0 8px 32px rgba(255, 0, 132, 0.6),
+                0 0 0 2px rgba(255, 0, 132, 0.4);
+    border-color: rgba(255, 0, 132, 0.6);
+}
+
 .experience-card,
 .project-card {
     min-height: 200px;
